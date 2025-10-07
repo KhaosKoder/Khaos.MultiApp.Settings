@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Khaos.Settings.Provider\Khaos.Settings.Provider.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Core\Khaos.Settings.Core.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Data\Khaos.Settings.Data.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Abstractions\Khaos.Settings.Abstractions.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Metrics\Khaos.Settings.Metrics.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Encryption\Khaos.Settings.Encryption.csproj" />
+  </ItemGroup>
+</Project>

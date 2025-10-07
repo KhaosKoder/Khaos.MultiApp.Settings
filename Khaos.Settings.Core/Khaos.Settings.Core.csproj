@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Description>Core services implementation for Khaos settings.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Khaos.Settings.Abstractions\Khaos.Settings.Abstractions.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Data\Khaos.Settings.Data.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Encryption\Khaos.Settings.Encryption.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Metrics\Khaos.Settings.Metrics.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Khaos.Settings.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>

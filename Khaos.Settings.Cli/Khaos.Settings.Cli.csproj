@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>khaos-settings</ToolCommandName>
+    <Description>CLI for Khaos multi-app settings management.</Description>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.0-rc.1.24431.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Khaos.Settings.Abstractions\Khaos.Settings.Abstractions.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Core\Khaos.Settings.Core.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Data\Khaos.Settings.Data.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Encryption\Khaos.Settings.Encryption.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Metrics\Khaos.Settings.Metrics.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Khaos.Settings.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+</Project>

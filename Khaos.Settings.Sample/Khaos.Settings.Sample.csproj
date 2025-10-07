@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Khaos.Settings.Abstractions\Khaos.Settings.Abstractions.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Core\Khaos.Settings.Core.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Data\Khaos.Settings.Data.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Encryption\Khaos.Settings.Encryption.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Metrics\Khaos.Settings.Metrics.csproj" />
+  </ItemGroup>
+
+</Project>

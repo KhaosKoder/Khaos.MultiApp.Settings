@@ -1,0 +1,35 @@
+<#!
+.SYNOPSIS
+  Runs tests collecting LINE coverage only (coverlet.msbuild).
+.DESCRIPTION
+  Uses msbuild integration; output placed at ./coverage-line/coverage.cobertura.xml
+#>
+param(
+  [switch]$OpenHtml
+)
+$ErrorActionPreference='Stop'
+
+$coverageDir = Join-Path (Get-Location) 'coverage-line'
+if (Test-Path $coverageDir) { Remove-Item $coverageDir -Recurse -Force }
+New-Item -ItemType Directory -Path $coverageDir | Out-Null
+
+Write-Host "Running tests (line coverage)..." -ForegroundColor Cyan
+
+dotnet test `
+  /p:CollectCoverage=true `
+  /p:CoverletOutput=$coverageDir/ `
+  /p:CoverletOutputFormat=cobertura `
+  /p:IncludeTestAssembly=false `
+  --configuration Debug
+if (!$?) { throw "Tests failed" }
+
+$coverageFile = Join-Path $coverageDir 'coverage.cobertura.xml'
+if (!(Test-Path $coverageFile)) { throw "Coverage file not generated: $coverageFile" }
+
+if (-not (Get-Command reportgenerator -ErrorAction SilentlyContinue)) { Write-Warning "reportgenerator not installed. Run: pwsh ./Setup/install-tools.ps1"; return }
+
+reportgenerator -reports:"$coverageFile" -targetdir:"$coverageDir/report" -reporttypes:"Html;TextSummary" | Out-Null
+$summary = Get-ChildItem "$coverageDir/report" -Filter '*ummary.txt' -ErrorAction SilentlyContinue | Select-Object -First 1
+if ($summary) { Get-Content $summary.FullName } else { Write-Warning "Summary text file not found." }
+if ($OpenHtml) { Start-Process "$coverageDir/report/index.html" }
+Write-Host "Done. Reports in $coverageDir/report" -ForegroundColor Green
