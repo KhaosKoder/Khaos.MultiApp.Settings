@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Khaos.Settings.Abstractions</PackageId>
     <AssemblyName>Khaos.Settings.Abstractions</AssemblyName>
     <RootNamespace>Khaos.Settings</RootNamespace>
     <Description>Abstractions for Khaos multi-app settings provider.</Description>

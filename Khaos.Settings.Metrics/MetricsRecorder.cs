@@ -1,5 +1,5 @@
-using Khaos.Settings.Interfaces;
 using System.Collections.Concurrent;
+using Khaos.Settings.Interfaces;
 
 namespace Khaos.Settings.Metrics;
 
@@ -15,9 +15,15 @@ public static class MetricsNames
 
 public sealed class NoOpMetricsRecorder : IMetricsRecorder
 {
-    private sealed class NoOpDisp : IDisposable { public void Dispose() { } }
+    private sealed class NoOpDisp : IDisposable
+    {
+        public void Dispose() { }
+    }
+
     public void Increment(string name, long value = 1) { }
+
     public void SetGauge(string name, double value) { }
+
     public IDisposable Time(string name) => new NoOpDisp();
 }
 
@@ -29,31 +35,41 @@ public sealed class InMemoryMetricsRecorder : IMetricsRecorder
     private sealed class Timing(IMemoryOwner owner) : IDisposable
     {
         private readonly IMemoryOwner _owner = owner;
-    private bool _disposed;
-    public void Dispose() { if (_disposed) return; _disposed = true; _owner.Dispose(); }
-}
+        private bool _disposed;
 
-private interface IMemoryOwner : IDisposable { }
+        public void Dispose()
+        {
+            if (_disposed) return;
+            _disposed = true;
+            _owner.Dispose();
+        }
+    }
 
-public void Increment(string name, long value = 1) => _counters.AddOrUpdate(name, value, (_, v) => v + value);
-public void SetGauge(string name, double value) => _gauges[name] = value;
+    private interface IMemoryOwner : IDisposable { }
 
-public IDisposable Time(string name)
-{
-    var sw = System.Diagnostics.Stopwatch.StartNew();
-    return new Timing(new StopwatchOwner(sw, end => Increment(name + ":ms", (long)end.TotalMilliseconds)));
-}
+    public void Increment(string name, long value = 1) =>
+        _counters.AddOrUpdate(name, value, (_, existing) => existing + value);
 
-private sealed class StopwatchOwner(System.Diagnostics.Stopwatch sw, Action<TimeSpan> report) : IMemoryOwner
+    public void SetGauge(string name, double value) => _gauges[name] = value;
+
+    public IDisposable Time(string name)
+    {
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        return new Timing(new StopwatchOwner(sw, elapsed => Increment($"{name}:ms", (long)elapsed.TotalMilliseconds)));
+    }
+
+    private sealed class StopwatchOwner(System.Diagnostics.Stopwatch sw, Action<TimeSpan> report) : IMemoryOwner
     {
         public void Dispose()
-{
-    sw.Stop();
-    report(sw.Elapsed);
-}
-}
+        {
+            sw.Stop();
+            report(sw.Elapsed);
+        }
+    }
 
-// Expose copies for diagnostics
-public IReadOnlyDictionary<string, long> SnapshotCounters() => new Dictionary<string, long>(_counters);
-public IReadOnlyDictionary<string, double> SnapshotGauges() => new Dictionary<string, double>(_gauges);
+    public IReadOnlyDictionary<string, long> SnapshotCounters() =>
+        new Dictionary<string, long>(_counters);
+
+    public IReadOnlyDictionary<string, double> SnapshotGauges() =>
+        new Dictionary<string, double>(_gauges);
 }

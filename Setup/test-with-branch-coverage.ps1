@@ -9,16 +9,17 @@ param(
 )
 $ErrorActionPreference='Stop'
 
-$coverageDir = Join-Path (Get-Location) 'coverage-branch'
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$coverageDir = Join-Path $repoRoot 'TestResults/BranchCoverage'
 if (Test-Path $coverageDir) { Remove-Item $coverageDir -Recurse -Force }
-New-Item -ItemType Directory -Path $coverageDir | Out-Null
+New-Item -ItemType Directory -Path $coverageDir -Force | Out-Null
 
 Write-Host "Running tests (branch coverage)..." -ForegroundColor Cyan
 
 dotnet test `
   /p:CollectCoverage=true `
   /p:EnableBranchCoverage=true `
-  /p:CoverletOutput=$coverageDir/ `
+  /p:CoverletOutput="$coverageDir/" `
   /p:CoverletOutputFormat=cobertura `
   /p:IncludeTestAssembly=false `
   --configuration Debug

@@ -4,7 +4,9 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Khaos.Settings.Provider</PackageId>
     <Description>Configuration provider and hosted reload service for Khaos settings.</Description>
+    <PackageTags>configuration;settings;provider;reload</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

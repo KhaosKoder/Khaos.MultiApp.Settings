@@ -4,7 +4,9 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Khaos.Settings.Core</PackageId>
     <Description>Core services implementation for Khaos settings.</Description>
+    <PackageTags>configuration;settings;multi-tenant;provider</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

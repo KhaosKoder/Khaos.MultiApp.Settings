@@ -27,7 +27,7 @@ public class ReloadBackgroundServiceTests
     [Fact]
     public async Task Given_InitialRun_When_ServiceStarts_Then_PublishesSnapshot()
     {
-        var seed = new[] { new SettingEntity { Key = "A", Value = "1", CreatedBy="u", ModifiedBy="u", CreatedDate=DateTime.UtcNow, ModifiedDate=DateTime.UtcNow } };
+        var seed = new[] { new SettingEntity { Key = "A", Value = "1", CreatedBy = "u", ModifiedBy = "u", CreatedDate = DateTime.UtcNow, ModifiedDate = DateTime.UtcNow } };
         var (svc, provider, _, metrics, health) = Build(seed);
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1));
         await svc.StartAsync(cts.Token);
@@ -41,7 +41,7 @@ public class ReloadBackgroundServiceTests
     [Fact]
     public async Task Given_NoChanges_When_PollOccurs_Then_ReloadSkippedMetricIncrements()
     {
-        var seed = new[] { new SettingEntity { Key = "A", Value = "1", CreatedBy="u", ModifiedBy="u", CreatedDate=DateTime.UtcNow, ModifiedDate=DateTime.UtcNow } };
+        var seed = new[] { new SettingEntity { Key = "A", Value = "1", CreatedBy = "u", ModifiedBy = "u", CreatedDate = DateTime.UtcNow, ModifiedDate = DateTime.UtcNow } };
         var (svc, provider, factory, metrics, _) = Build(seed);
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1));
         await svc.StartAsync(cts.Token);

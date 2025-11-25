@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+    <CollectCoverage Condition="'$(CollectCoverage)' == ''">true</CollectCoverage>
+    <CoverletOutput Condition="'$(CoverletOutput)' == ''">$(MSBuildThisFileDirectory)TestResults\Coverage\coverage</CoverletOutput>
+  </PropertyGroup>
+</Project>
