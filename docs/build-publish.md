@@ -8,7 +8,10 @@ Use these commands (or the helper scripts) from the repository root to build, te
 | --- | --- | --- |
 | Restore & build | `./scripts/build.ps1 -Configuration Release` | `dotnet build Khaos.MultiApp.Settings.sln -c Release` |
 | Run tests (coverage on by default) | `./scripts/test.ps1` | `dotnet test Khaos.MultiApp.Settings.sln -c Release /p:CollectCoverage=true` |
-| Generate HTML coverage + open report | `./scripts/coverage.ps1 -OpenReport` | `dotnet test Khaos.MultiApp.Settings.sln -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=html,lcov,json /p:CoverletOutput=TestResults/Coverage/coverage` |
+| Generate HTML coverage + open report | `./scripts/coverage.ps1 -OpenReport` | `dotnet test Khaos.MultiApp.Settings.sln -c Release /p:CollectCoverage=true /p:CoverletOutput=TestResults/Coverage/coverage` |
+| Clean build outputs + reports | `./scripts/clean.ps1 -Configuration Release` | `dotnet clean Khaos.MultiApp.Settings.sln -c Release` (script also deletes `bin/`, `obj/`, and `TestResults` contents) |
+| Format solution source | `./scripts/format-solution.ps1` | `dotnet format --no-restore --verbosity minimal` |
+| Verify formatting (no changes) | `./scripts/format-solution-verify-no-changes.ps1` | `dotnet format --verify-no-changes --no-restore --verbosity minimal` |
 | Pack NuGet + tool packages | `./scripts/pack.ps1 -Configuration Release` | `dotnet pack Khaos.MultiApp.Settings.sln -c Release -o artifacts/packages` |
 | Publish packages to NuGet.org | `./scripts/publish.ps1 -ApiKey <token>` | `dotnet nuget push artifacts/packages/*.nupkg -k <token> -s https://api.nuget.org/v3/index.json --skip-duplicate` |
 
@@ -29,6 +32,7 @@ Use these commands (or the helper scripts) from the repository root to build, te
 5. `./scripts/pack.ps1 -Configuration Release`
 6. Inspect `artifacts/packages/*.nupkg` and `TestResults/Coverage`.
 7. `./scripts/publish.ps1 -ApiKey <nuget-token>` (or use your CI system).
+8. Optionally run `./scripts/clean.ps1` and `./scripts/format-solution-verify-no-changes.ps1` before pushing to confirm the repo stays tidy.
 
 ## Viewing sample apps
 

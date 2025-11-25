@@ -33,11 +33,11 @@ public class ExportImportTests
     {
         var rs = Build();
         var svc = rs.Provider.GetRequiredService<ISettingsService>();
-        await svc.UpsertAsync(new SettingUpsert { Key="Public", Value="P", ChangedBy="u" }, CancellationToken.None);
-        await svc.UpsertAsync(new SettingUpsert { Key="Secret", Value="S", ChangedBy="u", IsSecret=true }, CancellationToken.None);
-        var tmp = Path.Combine(Path.GetTempPath(), Guid.NewGuid()+".json");
+        await svc.UpsertAsync(new SettingUpsert { Key = "Public", Value = "P", ChangedBy = "u" }, CancellationToken.None);
+        await svc.UpsertAsync(new SettingUpsert { Key = "Secret", Value = "S", ChangedBy = "u", IsSecret = true }, CancellationToken.None);
+        var tmp = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".json");
         var cmd = ExportImport.CreateExport(_ => rs);
-        var exit = await cmd.InvokeAsync(new[]{"--file", tmp});
+        var exit = await cmd.InvokeAsync(new[] { "--file", tmp });
         exit.Should().Be(0);
         var json = await File.ReadAllTextAsync(tmp);
         json.Should().Contain("Public").And.Contain("Secret");

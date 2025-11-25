@@ -19,7 +19,7 @@ Write-Host "[coverage] Collecting coverage to $coverageDir" -ForegroundColor Cya
 
 Push-Location $repoRoot
 try {
-    dotnet test $solution -c $Configuration "/p:CollectCoverage=true" "/p:CoverletOutputFormat=json,lcov,opencover,cobertura,html" "/p:CoverletOutput=$coverletOutput"
+    dotnet test $solution -c $Configuration "/p:CollectCoverage=true" "/p:CoverletOutput=$coverletOutput"
 }
 finally {
     Pop-Location

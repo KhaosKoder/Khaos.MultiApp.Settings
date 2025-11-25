@@ -24,7 +24,7 @@ public class BinarySettingsAccessorAdvancedTests
     public void Given_Binary_When_GetAsUuencode_Then_EndsWithBacktick()
     {
         var acc = new BinarySettingsAccessor();
-        acc.SetSnapshot(System.Collections.Immutable.ImmutableDictionary<string, byte[]>.Empty.Add("K", new byte[]{1,2,3,4,5}));
+        acc.SetSnapshot(System.Collections.Immutable.ImmutableDictionary<string, byte[]>.Empty.Add("K", new byte[] { 1, 2, 3, 4, 5 }));
         var text = acc.GetAsUuencode("K");
         text.Trim().EndsWith("`").Should().BeTrue();
     }
