@@ -4,8 +4,10 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageId>Khaos.Settings.Data</PackageId>
     <Description>EF Core data layer for Khaos settings.</Description>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <PackageTags>configuration;settings;efcore;multi-tenant</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

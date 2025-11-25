@@ -4,7 +4,9 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageId>Khaos.Settings.Metrics</PackageId>
     <Description>Metrics abstraction for Khaos settings.</Description>
+    <PackageTags>configuration;settings;metrics</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
