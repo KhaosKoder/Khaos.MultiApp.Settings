@@ -7,6 +7,7 @@
     <PackageId>Khaos.Settings.Core</PackageId>
     <Description>Core services implementation for Khaos settings.</Description>
     <PackageTags>configuration;settings;multi-tenant;provider</PackageTags>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

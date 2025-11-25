@@ -4,9 +4,9 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>Khaos.Settings.Provider</PackageId>
-    <Description>Configuration provider and hosted reload service for Khaos settings.</Description>
-    <PackageTags>configuration;settings;provider;reload</PackageTags>
+    <PackageId>Khaos.Settings</PackageId>
+    <Description>Full Khaos multi-app settings stack (abstractions, data, encryption, metrics, core services, provider, reload).</Description>
+    <PackageTags>configuration;settings;provider;reload;multi-app;multi-tenant</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0-rc.1.24431.7" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-rc.1.24431.7" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
