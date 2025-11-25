@@ -6,7 +6,10 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$solution = Join-Path $repoRoot 'Khaos.MultiApp.Settings.sln'
+$projectsToPack = @(
+    'Khaos.Settings.Provider/Khaos.Settings.Provider.csproj',
+    'Khaos.Settings.Cli/Khaos.Settings.Cli.csproj'
+)
 $packagesDir = if ($OutputDirectory) {
     if ([System.IO.Path]::IsPathRooted($OutputDirectory)) {
         $OutputDirectory
@@ -23,11 +26,15 @@ if (-not (Test-Path $packagesDir)) {
     New-Item -ItemType Directory -Path $packagesDir -Force | Out-Null
 }
 
-Write-Host "[pack] Packing solution to $packagesDir" -ForegroundColor Cyan
+Write-Host "[pack] Packing projects to $packagesDir" -ForegroundColor Cyan
 
 Push-Location $repoRoot
 try {
-    dotnet pack $solution -c $Configuration -o $packagesDir
+    foreach ($project in $projectsToPack) {
+        $projectPath = Join-Path $repoRoot $project
+        Write-Host "[pack] dotnet pack $project" -ForegroundColor DarkCyan
+        dotnet pack $projectPath -c $Configuration -o $packagesDir
+    }
 }
 finally {
     Pop-Location

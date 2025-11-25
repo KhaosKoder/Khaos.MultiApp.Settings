@@ -7,6 +7,7 @@
     <PackageId>Khaos.Settings.Encryption</PackageId>
     <Description>No-op encryption provider for Khaos settings.</Description>
     <PackageTags>configuration;settings;encryption</PackageTags>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
