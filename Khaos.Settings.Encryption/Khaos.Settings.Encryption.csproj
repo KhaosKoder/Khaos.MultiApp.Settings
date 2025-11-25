@@ -4,7 +4,9 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Khaos.Settings.Encryption</PackageId>
     <Description>No-op encryption provider for Khaos settings.</Description>
+    <PackageTags>configuration;settings;encryption</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

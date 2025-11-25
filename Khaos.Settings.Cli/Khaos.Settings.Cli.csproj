@@ -7,8 +7,10 @@
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>khaos-settings</ToolCommandName>
+    <PackageId>Khaos.Settings.Cli</PackageId>
     <Description>CLI for Khaos multi-app settings management.</Description>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackageTags>configuration;settings;cli</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
