@@ -20,8 +20,8 @@ Use these commands (or the helper scripts) from the repository root to build, te
 ## Test coverage output
 
 - Coverage is enabled automatically for `Khaos.Settings.Tests` via Coverlet.
-- HTML, Cobertura, JSON, LCOV, and OpenCover reports are written to `TestResults/Coverage/` at the repository root.
-- Open `TestResults/Coverage/index.htm` (or run `./scripts/coverage.ps1 -OpenReport`) to view the report in a browser.
+- `./scripts/coverage.ps1` forces Cobertura output and then runs [ReportGenerator](https://github.com/danielpalme/ReportGenerator) to create `TestResults/Coverage/report/index.html` plus a text summary. Install the tool once with `pwsh ./Setup/install-tools.ps1` (or `dotnet tool install -g dotnet-reportgenerator-globaltool`).
+- The raw `coverage.cobertura.xml` and `coverage.json` files also live under `TestResults/Coverage/` if you need to feed them into another system.
 
 ## Release workflow (local)
 

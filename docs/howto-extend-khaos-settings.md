@@ -25,6 +25,7 @@ This guide is for contributors enhancing the libraries or CLI in this repository
    - `scripts/test.ps1` – run the unit tests (coverage on by default).
    - `scripts/coverage.ps1 -OpenReport` – regenerate the HTML report in `TestResults/Coverage` and open it.
 4. For package builds, run `scripts/pack.ps1` and inspect `artifacts/packages`.
+5. Remember that everything under `buildTransitive/` (currently `Khaos.Settings.CopyDocs.targets`) ships with each NuGet package and executes inside *consuming* projects. Keep those files stable—they copy the `/docs` folder into downstream solutions so implementers always have the latest guidance.
 
 ## Adding new functionality
 

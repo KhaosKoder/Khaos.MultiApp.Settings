@@ -51,10 +51,4 @@
     <None Include="$(MSBuildThisFileDirectory)buildTransitive\**\*" Pack="true" PackagePath="buildTransitive\%(RecursiveDir)%(Filename)%(Extension)" Visible="false" />
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
-    <CollectCoverage Condition="'$(CollectCoverage)' == ''">true</CollectCoverage>
-    <CoverletOutputFormat Condition="'$(CoverletOutputFormat)' == ''">json,lcov,opencover,cobertura,html</CoverletOutputFormat>
-    <CoverletOutput Condition="'$(CoverletOutput)' == ''">$(MSBuildThisFileDirectory)TestResults\Coverage\coverage</CoverletOutput>
-    <MergeWith Condition="'$(MergeWith)' == ''">$(MSBuildThisFileDirectory)TestResults\Coverage\coverage.json</MergeWith>
-  </PropertyGroup>
 </Project>

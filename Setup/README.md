@@ -16,7 +16,7 @@ Re-run anytime; idempotent.
 
 ### test-with-line-coverage.ps1
 Runs the full test suite collecting LINE coverage only.
-Output directory: `./coverage-line/`
+Output directory: `./TestResults/LineCoverage/`
 Produces:
 - `coverage.cobertura.xml`
 - `coverage.opencover.xml`
@@ -26,7 +26,7 @@ Open HTML automatically by adding `-OpenHtml` switch.
 
 ### test-with-branch-coverage.ps1
 Same as above but enables branch coverage metrics (`/p:BranchCoverage=true`).
-Output directory: `./coverage-branch/`
+Output directory: `./TestResults/BranchCoverage/`
 Artifacts analogous to line coverage script.
 Use `-OpenHtml` to auto-open report.
 
@@ -51,7 +51,7 @@ Sets `KHAOS_SETTINGS_CS` env var before launching.
 
 ## Viewing Coverage
 1. Run one of the coverage scripts.
-2. Navigate to the output folder (`coverage-line/report` or `coverage-branch/report`).
+2. Navigate to the output folder (`TestResults/LineCoverage/report` or `TestResults/BranchCoverage/report`).
 3. Open `index.html` in a browser for detailed drill-down.
 4. For quick terminal view, read `Summary.txt`. Branch percentage appears when using branch script.
 
