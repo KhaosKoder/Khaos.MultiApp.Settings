@@ -1,0 +1,3 @@
+[submodule "ext/Khaos.Time"]
+	path = ext/Khaos.Time
+	url = https://github.com/KhaosKoder/Khaos.Time.git
