@@ -14,16 +14,13 @@ Khaos Settings is a hierarchical, multi-application configuration store with:
 - Periodic background reload into `IConfiguration` + change tokens
 - Metrics & health reporting hooks
 
-You own the database (no embedded EF migrations) – run the provided SQL script then wire the provider into your host.
+You own the database (no embedded EF migrations) ï¿½ run the provided SQL script then wire the provider into your host.
 
 ---
 ## 2. Install Packages
-Add project/package references (names may differ if packed):
-- Khaos.Settings.Abstractions
-- Khaos.Settings.Data
-- Khaos.Settings.Core
-- Khaos.Settings.Provider
-- (Optional) Khaos.Settings.Encryption, Khaos.Settings.Metrics, Khaos.Settings.Cli
+Add references depending on how you consume the stack:
+- **NuGet**: `KhaosCode.Settings` (bundles the provider plus abstractions, data, core, encryption, and metrics assemblies).
+- **Source projects**: `Khaos.Settings.Abstractions`, `Khaos.Settings.Data`, `Khaos.Settings.Core`, `Khaos.Settings.Provider`, optional `Khaos.Settings.Encryption`, `Khaos.Settings.Metrics`, `Khaos.Settings.Cli`.
 
 ---
 ## 3. Create Database Schema
@@ -123,7 +120,7 @@ monitor.OnChange((opts, name) =>
 ---
 ## 7. Periodic Reload Mechanics
 1. Background service wakes every `PollingInterval`.
-2. Fast signature check (count, max rowversion, key checksum) – if unchanged => skip.
+2. Fast signature check (count, max rowversion, key checksum) ï¿½ if unchanged => skip.
 3. On change, full deterministic hash built. If hash differs => rebuild snapshot.
 4. Provider publishes dictionary; change token triggers; options + `IConfiguration` readers see new values.
 5. `IBinarySettingsAccessor` updated atomically for binary entries.

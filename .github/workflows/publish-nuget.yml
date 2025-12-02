@@ -1,0 +1,61 @@
+name: Publish to NuGet (Trusted Publishing)
+
+on:
+  push:
+    tags:
+      - 'Khaos.Web.Authorization/v*'   # e.g. v1.0.0, v1.0.1
+
+permissions:
+  contents: read
+  id-token: write                   # REQUIRED for Trusted Publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --configuration Release --no-build
+
+      # Pack *one* project into ./artifacts
+      - name: Pack
+        run: |
+          VERSION=${GITHUB_REF_NAME#Khaos.Web.Authorization/}
+          VERSION=${VERSION#v}
+          if [[ -z "$VERSION" || "$VERSION" == "$GITHUB_REF_NAME" ]]; then
+            echo "Unable to parse package version from tag '$GITHUB_REF_NAME'." >&2
+            exit 1
+          fi
+
+          dotnet pack src/Khaos.Web.Authorization/Khaos.Web.Authorization.csproj \
+                 --configuration Release \
+                 --no-build \
+                 -p:PackageVersion=$VERSION \
+                 -o ./artifacts
+
+      # Exchange GitHub OIDC token -> short-lived API key on nuget.org
+      - name: NuGet login (Trusted Publishing)
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: KhaosKoder 
+
+      - name: Push package to nuget.org
+        run: |
+          dotnet nuget push "./artifacts/*.nupkg" \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}"
