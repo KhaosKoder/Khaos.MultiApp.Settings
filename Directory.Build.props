@@ -25,7 +25,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <MinVerTagPrefix>Khaos.Settings/v</MinVerTagPrefix>
+    <MinVerTagPrefix>Khaos.MultiApp.Settings/v</MinVerTagPrefix>
     <MinVerAutoIncrement>minor</MinVerAutoIncrement>
     <MinVerDefaultPreReleaseIdentifiers>alpha.0</MinVerDefaultPreReleaseIdentifiers>
   </PropertyGroup>
