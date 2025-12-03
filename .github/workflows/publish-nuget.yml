@@ -3,7 +3,7 @@ name: Publish to NuGet (Trusted Publishing)
 on:
   push:
     tags:
-      - 'Khaos.Web.Authorization/v*'   # e.g. v1.0.0, v1.0.1
+      - 'Khaos.MultiApp.Settings/v*'   # e.g. Khaos.MultiApp.Settings/v1.0.0
 
 permissions:
   contents: read
@@ -23,29 +23,30 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore /p:UseLocalKhaosTime=false
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore /p:UseLocalKhaosTime=false
 
       - name: Test
-        run: dotnet test --configuration Release --no-build
+        run: dotnet test --configuration Release --no-build /p:UseLocalKhaosTime=false
 
       # Pack *one* project into ./artifacts
       - name: Pack
         run: |
-          VERSION=${GITHUB_REF_NAME#Khaos.Web.Authorization/}
+          VERSION=${GITHUB_REF_NAME#Khaos.MultiApp.Settings/}
           VERSION=${VERSION#v}
           if [[ -z "$VERSION" || "$VERSION" == "$GITHUB_REF_NAME" ]]; then
             echo "Unable to parse package version from tag '$GITHUB_REF_NAME'." >&2
             exit 1
           fi
 
-          dotnet pack src/Khaos.Web.Authorization/Khaos.Web.Authorization.csproj \
-                 --configuration Release \
-                 --no-build \
-                 -p:PackageVersion=$VERSION \
-                 -o ./artifacts
+          dotnet pack Khaos.Settings.Provider/Khaos.Settings.Provider.csproj \
+            --configuration Release \
+            --no-build \
+            /p:UseLocalKhaosTime=false \
+            -p:PackageVersion=$VERSION \
+            -o ./artifacts
 
       # Exchange GitHub OIDC token -> short-lived API key on nuget.org
       - name: NuGet login (Trusted Publishing)

@@ -4,18 +4,38 @@ Use these commands (or the helper scripts) from the repository root to build, te
 
 ## Quick reference
 
-| Task | Script | Equivalent command |
+| Task | Script (run from `scripts/` folder) | Equivalent command |
 | --- | --- | --- |
-| Restore & build | `./scripts/build.ps1 -Configuration Release` | `dotnet build Khaos.MultiApp.Settings.sln -c Release` |
-| Run tests (coverage on by default) | `./scripts/test.ps1` | `dotnet test Khaos.MultiApp.Settings.sln -c Release /p:CollectCoverage=true` |
-| Generate HTML coverage + open report | `./scripts/coverage.ps1 -OpenReport` | `dotnet test Khaos.MultiApp.Settings.sln -c Release /p:CollectCoverage=true /p:CoverletOutput=TestResults/Coverage/coverage` |
-| Clean build outputs + reports | `./scripts/clean.ps1 -Configuration Release` | `dotnet clean Khaos.MultiApp.Settings.sln -c Release` (script also deletes `bin/`, `obj/`, and `TestResults` contents) |
-| Format solution source | `./scripts/format-solution.ps1` | `dotnet format --no-restore --verbosity minimal` |
-| Verify formatting (no changes) | `./scripts/format-solution-verify-no-changes.ps1` | `dotnet format --verify-no-changes --no-restore --verbosity minimal` |
-| Pack NuGet + tool packages | `./scripts/pack.ps1 -Configuration Release` | `dotnet pack Khaos.MultiApp.Settings.sln -c Release -o artifacts/packages` |
-| Publish packages to NuGet.org | `./scripts/publish.ps1 -ApiKey <token>` | `dotnet nuget push artifacts/packages/*.nupkg -k <token> -s https://api.nuget.org/v3/index.json --skip-duplicate` |
+| Restore & build | `powershell -File build.ps1` | `dotnet build Khaos.MultiApp.Settings.sln -c Release` |
+| Run tests (coverage on by default) | `powershell -File test.ps1` | `dotnet test Khaos.MultiApp.Settings.sln -c Release /p:CollectCoverage=true` |
+| Generate HTML coverage + open report | `powershell -File coverage.ps1` | `dotnet test Khaos.MultiApp.Settings.sln -c Release /p:CollectCoverage=true /p:CoverletOutput=TestResults/Coverage/coverage` |
+| Clean build outputs + reports | `powershell -File clean.ps1` | `dotnet clean Khaos.MultiApp.Settings.sln -c Release` (script also deletes `bin/`, `obj/`, and `TestResults` contents) |
+| Format solution source | `powershell -File format-solution.ps1` | `dotnet format --no-restore --verbosity minimal` |
+| Verify formatting (no changes) | `powershell -File format-solution-verify-no-changes.ps1` | `dotnet format --verify-no-changes --no-restore --verbosity minimal` |
+| Pack NuGet + tool packages | `powershell -File pack.ps1` | `dotnet pack Khaos.MultiApp.Settings.sln -c Release -o artifacts/packages` |
+| Publish packages to NuGet.org | `powershell -File publish.ps1` | `dotnet nuget push artifacts/packages/*.nupkg -k <token> -s https://api.nuget.org/v3/index.json --skip-duplicate` |
 
-> All scripts assume PowerShell 5.1+ and resolve paths relative to the `scripts` directory. Run them from anywhere by prefixing with `pwsh`/`powershell` if needed.
+> All scripts assume PowerShell 5.1+ and must be executed from the `scripts` directory with no parameters, e.g., `cd scripts; powershell -File build.ps1`.
+
+### Manage the Khaos.Time submodule (local dev only)
+
+`UseLocalKhaosTime` defaults to `true`, so you need the dependency source when building locally. Use these scripts (always run from `scripts/`):
+
+1. **First-time setup (adds the submodule to your clone):**
+	```powershell
+	cd scripts
+	powershell -File add-khaos-time.ps1
+	```
+	This runs `git submodule add` (if needed) and initializes the checkout. Commit the resulting `.gitmodules` + submodule entry if you’re the first to add it.
+
+2. **Subsequent syncs or fresh clones (submodule already tracked):**
+	```powershell
+	cd scripts
+	powershell -File init-khaos-time.ps1
+	```
+	This executes `git submodule update --init --recursive ext/Khaos.Time` so you can step into and edit the `Khaos.Time` project during local development.
+
+CI and release builds override `UseLocalKhaosTime=false`, so they do not require the submodule.
 
 ## Test coverage output
 

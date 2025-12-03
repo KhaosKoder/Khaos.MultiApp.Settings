@@ -4,10 +4,25 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>KhaosCode.Settings</PackageId>
+    <PackageId>KhaosCode.MultiApp.Settings</PackageId>
     <Description>Full Khaos multi-app settings stack (abstractions, data, encryption, metrics, core services, provider, reload).</Description>
     <PackageTags>configuration;settings;provider;reload;multi-app;multi-tenant</PackageTags>
+    <!-- Local builds default to using the checked-out Khaos.Time submodule unless explicitly disabled (e.g., CI). -->
+    <UseLocalKhaosTime>true</UseLocalKhaosTime>
   </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(UseLocalKhaosTime)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\ext\Khaos.Time\src\Khaos.Time\Khaos.Time.csproj" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="KhaosCode.Time" Version="1.0.0" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 
   <ItemGroup>
     <ProjectReference Include="..\Khaos.Settings.Abstractions\Khaos.Settings.Abstractions.csproj" />

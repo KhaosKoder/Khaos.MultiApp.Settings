@@ -19,7 +19,7 @@ You own the database (no embedded EF migrations) � run the provided SQL script
 ---
 ## 2. Install Packages
 Add references depending on how you consume the stack:
-- **NuGet**: `KhaosCode.Settings` (bundles the provider plus abstractions, data, core, encryption, and metrics assemblies).
+- **NuGet**: `KhaosCode.MultiApp.Settings` (bundles the provider plus abstractions, data, core, encryption, and metrics assemblies).
 - **Source projects**: `Khaos.Settings.Abstractions`, `Khaos.Settings.Data`, `Khaos.Settings.Core`, `Khaos.Settings.Provider`, optional `Khaos.Settings.Encryption`, `Khaos.Settings.Metrics`, `Khaos.Settings.Cli`.
 
 ---

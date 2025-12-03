@@ -6,13 +6,13 @@ This guide is for developers integrating the Khaos Settings libraries or CLI int
 
 | Scenario | Recommended packages |
 | --- | --- |
-| Configuration provider for apps | `KhaosCode.Settings` (NuGet package bundling the abstractions/core/data/encryption/metrics/provider assemblies)
+| Configuration provider for apps | `KhaosCode.MultiApp.Settings` (NuGet package bundling the abstractions/core/data/encryption/metrics/provider assemblies)
 | Access shared abstractions only | `Khaos.Settings.Abstractions`
 | Command-line management | `Khaos.Settings.Cli` (global or local tool)
 
 ```bash
 # Example: add the provider package to a web app
- dotnet add package KhaosCode.Settings
+ dotnet add package KhaosCode.MultiApp.Settings
 
 # Example: install the CLI as a local tool
  dotnet tool install --local Khaos.Settings.Cli

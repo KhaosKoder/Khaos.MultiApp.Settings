@@ -20,10 +20,10 @@ jobs:
           dotnet-version: '9.0.x' 
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore /p:UseLocalKhaosTime=false
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore /p:UseLocalKhaosTime=false
 
       - name: Test
-        run: dotnet test --configuration Release --no-build
+        run: dotnet test --configuration Release --no-build /p:UseLocalKhaosTime=false
