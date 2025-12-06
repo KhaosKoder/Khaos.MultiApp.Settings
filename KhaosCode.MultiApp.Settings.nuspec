@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>KhaosCode.MultiApp.Settings</id>
+    <version>1.0.1</version>
+    <authors>Khaos</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/KhaosKoder/Khaos.MultiApp.Settings</projectUrl>
+    <description>Full Khaos multi-app settings stack (abstractions, data, encryption, metrics, core services, provider, reload).</description>
+    <tags>configuration settings provider reload multi-app multi-tenant</tags>
+    <repository type="git" url="https://github.com/KhaosKoder/Khaos.MultiApp.Settings" branch="refs/heads/main" commit="4cc7c7a9277d728404f7651e21a84c7f1ec58f44" />
+    <dependencies>
+      <group targetFramework="net9.0">
+        <dependency id="KhaosCode.Time" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="Khaos.Settings.Abstractions" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="Khaos.Settings.Core" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="Khaos.Settings.Data" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="Khaos.Settings.Encryption" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="Khaos.Settings.Metrics" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Configuration" version="9.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting" version="9.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Options" version="9.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

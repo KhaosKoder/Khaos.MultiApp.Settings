@@ -37,11 +37,11 @@
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="..\Khaos.Settings.Abstractions\Khaos.Settings.Abstractions.csproj" />
-    <ProjectReference Include="..\Khaos.Settings.Core\Khaos.Settings.Core.csproj" />
-    <ProjectReference Include="..\Khaos.Settings.Data\Khaos.Settings.Data.csproj" />
-    <ProjectReference Include="..\Khaos.Settings.Encryption\Khaos.Settings.Encryption.csproj" />
-    <ProjectReference Include="..\Khaos.Settings.Metrics\Khaos.Settings.Metrics.csproj" />
+    <ProjectReference Include="..\Khaos.Settings.Abstractions\Khaos.Settings.Abstractions.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Khaos.Settings.Core\Khaos.Settings.Core.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Khaos.Settings.Data\Khaos.Settings.Data.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Khaos.Settings.Encryption\Khaos.Settings.Encryption.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Khaos.Settings.Metrics\Khaos.Settings.Metrics.csproj" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
