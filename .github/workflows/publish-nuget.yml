@@ -43,7 +43,7 @@ jobs:
 
           dotnet pack Khaos.Settings.Provider/Khaos.Settings.Provider.csproj \
             --configuration Release \
-            --no-build \
+            --no-restore \
             /p:UseLocalKhaosTime=false \
             -p:PackageVersion=$VERSION \
             -o ./artifacts
