@@ -9,6 +9,7 @@
     <PackageTags>configuration;settings;provider;reload;multi-app;multi-tenant</PackageTags>
     <!-- Local builds default to using the checked-out Khaos.Time submodule unless explicitly disabled (e.g., CI). -->
     <UseLocalKhaosTime>true</UseLocalKhaosTime>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);_IncludeSettingsAssemblies</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
   <Choose>
@@ -23,6 +24,17 @@
       </ItemGroup>
     </Otherwise>
   </Choose>
+
+  <Target Name="_IncludeSettingsAssemblies" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <_SettingsAssemblies Include="@(ReferenceCopyLocalPaths)"
+        Condition="'%(ReferenceCopyLocalPaths.ReferenceSourceTarget)' == 'ProjectReference' and ('%(ReferenceCopyLocalPaths.FileName)' == 'Khaos.Settings.Abstractions' or '%(ReferenceCopyLocalPaths.FileName)' == 'Khaos.Settings.Core' or '%(ReferenceCopyLocalPaths.FileName)' == 'Khaos.Settings.Data' or '%(ReferenceCopyLocalPaths.FileName)' == 'Khaos.Settings.Encryption' or '%(ReferenceCopyLocalPaths.FileName)' == 'Khaos.Settings.Metrics')" />
+      <TfmSpecificPackageFile Include="@(_SettingsAssemblies)">
+        <PackagePath>lib\$(TargetFramework)\</PackagePath>
+        <BuildOutputInPackage>true</BuildOutputInPackage>
+      </TfmSpecificPackageFile>
+    </ItemGroup>
+  </Target>
 
   <ItemGroup>
     <ProjectReference Include="..\Khaos.Settings.Abstractions\Khaos.Settings.Abstractions.csproj" />

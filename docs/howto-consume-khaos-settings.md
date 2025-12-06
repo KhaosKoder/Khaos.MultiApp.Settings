@@ -10,6 +10,8 @@ This guide is for developers integrating the Khaos Settings libraries or CLI int
 | Access shared abstractions only | `Khaos.Settings.Abstractions`
 | Command-line management | `Khaos.Settings.Cli` (global or local tool)
 
+> One `KhaosCode.MultiApp.Settings` reference copies every runtime assembly (Abstractions, Core, Data, Encryption, Metrics, Provider) into your app output so you never chase multiple package versions.
+
 ```bash
 # Example: add the provider package to a web app
  dotnet add package KhaosCode.MultiApp.Settings
