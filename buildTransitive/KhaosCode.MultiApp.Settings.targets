@@ -1,3 +1,31 @@
 <Project>
-  <Import Project="$(MSBuildThisFileDirectory)Khaos.Settings.CopyDocs.targets" />
+  <PropertyGroup>
+    <KhaosSettingsDocsSourceDir>$(MSBuildThisFileDirectory)..\docs\</KhaosSettingsDocsSourceDir>
+    <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == '' and '$(SolutionDir)' != ''">
+      $(SolutionDir)docs\Khaos.MultiAppSettings\
+    </KhaosSettingsDocsTargetDir>
+    <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == ''">
+      $([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\docs\Khaos.MultiAppSettings\'))
+    </KhaosSettingsDocsTargetDir>
+  </PropertyGroup>
+
+  <Target Name="KhaosSettingsCopyDocs"
+          BeforeTargets="PrepareForBuild"
+          Condition="'$(KhaosSettingsDocsCopyExecuted)' != 'true' and Exists('$(KhaosSettingsDocsSourceDir)')">
+    <ItemGroup>
+      <KhaosSettingsDocFiles Include="$(KhaosSettingsDocsSourceDir)**\*.*" />
+    </ItemGroup>
+
+    <MakeDir Directories="$(KhaosSettingsDocsTargetDir)" />
+
+    <Copy SourceFiles="@(KhaosSettingsDocFiles)"
+          DestinationFiles="@(KhaosSettingsDocFiles->'$(KhaosSettingsDocsTargetDir)%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+
+    <PropertyGroup>
+      <KhaosSettingsDocsCopyExecuted>true</KhaosSettingsDocsCopyExecuted>
+    </PropertyGroup>
+
+    <Message Text="Khaos Settings documentation copied to $(KhaosSettingsDocsTargetDir)" Importance="Low" />
+  </Target>
 </Project>

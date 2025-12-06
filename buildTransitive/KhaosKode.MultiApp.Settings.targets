@@ -1,3 +1,0 @@
-<Project>
-  <Import Project="$(MSBuildThisFileDirectory)Khaos.Settings.CopyDocs.targets" />
-</Project>
