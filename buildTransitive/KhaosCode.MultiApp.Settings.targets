@@ -1,12 +1,8 @@
 <Project>
   <PropertyGroup>
     <KhaosSettingsDocsSourceDir>$(MSBuildThisFileDirectory)..\docs\</KhaosSettingsDocsSourceDir>
-    <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == '' and '$(SolutionDir)' != ''">
-      $(SolutionDir)docs\Khaos.MultiAppSettings\
-    </KhaosSettingsDocsTargetDir>
-    <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == ''">
-      $([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\docs\Khaos.MultiAppSettings\'))
-    </KhaosSettingsDocsTargetDir>
+    <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == '' and '$(SolutionDir)' != ''">$(SolutionDir)docs\Khaos.MultiAppSettings\</KhaosSettingsDocsTargetDir>
+    <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\docs\Khaos.MultiAppSettings\'))</KhaosSettingsDocsTargetDir>
   </PropertyGroup>
 
   <Target Name="KhaosSettingsCopyDocs"
