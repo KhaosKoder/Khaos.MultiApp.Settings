@@ -3,11 +3,12 @@
     <KhaosSettingsDocsSourceDir>$(MSBuildThisFileDirectory)..\docs\</KhaosSettingsDocsSourceDir>
     <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == '' and '$(SolutionDir)' != ''">$(SolutionDir)docs\Khaos.MultiAppSettings\</KhaosSettingsDocsTargetDir>
     <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\docs\Khaos.MultiAppSettings\'))</KhaosSettingsDocsTargetDir>
+    <KhaosSettingsDocsSentinel>$(KhaosSettingsDocsTargetDir).installed</KhaosSettingsDocsSentinel>
   </PropertyGroup>
 
   <Target Name="KhaosSettingsCopyDocs"
           BeforeTargets="PrepareForBuild"
-          Condition="'$(KhaosSettingsDocsCopyExecuted)' != 'true' and Exists('$(KhaosSettingsDocsSourceDir)')">
+          Condition="Exists('$(KhaosSettingsDocsSourceDir)') and !Exists('$(KhaosSettingsDocsSentinel)')">
     <ItemGroup>
       <KhaosSettingsDocFiles Include="$(KhaosSettingsDocsSourceDir)**\*.*" />
     </ItemGroup>
@@ -18,9 +19,9 @@
           DestinationFiles="@(KhaosSettingsDocFiles->'$(KhaosSettingsDocsTargetDir)%(RecursiveDir)%(Filename)%(Extension)')"
           SkipUnchangedFiles="true" />
 
-    <PropertyGroup>
-      <KhaosSettingsDocsCopyExecuted>true</KhaosSettingsDocsCopyExecuted>
-    </PropertyGroup>
+    <WriteLinesToFile File="$(KhaosSettingsDocsSentinel)"
+                      Lines="Khaos docs copied on $([System.DateTime]::UtcNow.ToString('u'))"
+                      Overwrite="true" />
 
     <Message Text="Khaos Settings documentation copied to $(KhaosSettingsDocsTargetDir)" Importance="Low" />
   </Target>
