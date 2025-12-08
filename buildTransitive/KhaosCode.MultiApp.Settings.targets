@@ -1,7 +1,8 @@
 <Project>
   <PropertyGroup>
     <KhaosSettingsDocsSourceDir>$(MSBuildThisFileDirectory)..\docs\</KhaosSettingsDocsSourceDir>
-    <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == '' and '$(SolutionDir)' != ''">$(SolutionDir)docs\Khaos.MultiAppSettings\</KhaosSettingsDocsTargetDir>
+    <KhaosSettingsDocsSolutionDir Condition="'$(SolutionDir)' != '' and '$(SolutionDir)' != '*Undefined*'">$(SolutionDir)</KhaosSettingsDocsSolutionDir>
+    <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == '' and '$(KhaosSettingsDocsSolutionDir)' != ''">$([System.IO.Path]::GetFullPath('$(KhaosSettingsDocsSolutionDir)\docs\Khaos.MultiAppSettings\'))</KhaosSettingsDocsTargetDir>
     <KhaosSettingsDocsTargetDir Condition="'$(KhaosSettingsDocsTargetDir)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\docs\Khaos.MultiAppSettings\'))</KhaosSettingsDocsTargetDir>
     <KhaosSettingsDocsSentinel>$(KhaosSettingsDocsTargetDir).installed</KhaosSettingsDocsSentinel>
   </PropertyGroup>
