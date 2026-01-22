@@ -1,5 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <!--
+    Multi-DLL Bundling Pattern: TargetsForTfmSpecificBuildOutput
+    
+    This package bundles Abstractions, Core, Data, Encryption, and Metrics into a single
+    NuGet package along with the Provider itself. This uses the standard MSBuild
+    extensibility point TargetsForTfmSpecificBuildOutput to add project reference DLLs
+    to the package output.
+    
+    The _IncludeSettingsAssemblies target runs during pack and adds matching project
+    references to TfmSpecificPackageFile for inclusion in lib/{tfm}/.
+  -->
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

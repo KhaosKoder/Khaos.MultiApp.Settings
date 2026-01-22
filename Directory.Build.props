@@ -7,6 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Deterministic>true</Deterministic>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)artifacts\</PackageOutputPath>
     <RepositoryUrl>https://github.com/KhaosKoder/Khaos.MultiApp.Settings</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/KhaosKoder/Khaos.MultiApp.Settings</PackageProjectUrl>
