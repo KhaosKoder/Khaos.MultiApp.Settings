@@ -25,7 +25,7 @@
   <Choose>
     <When Condition="'$(UseLocalKhaosTime)' == 'true'">
       <ItemGroup>
-        <ProjectReference Include="..\ext\Khaos.Time\src\Khaos.Time\Khaos.Time.csproj" />
+        <ProjectReference Include="..\..\Khaos.Time\src\Khaos.Time\Khaos.Time.csproj" />
       </ItemGroup>
     </When>
     <Otherwise>
