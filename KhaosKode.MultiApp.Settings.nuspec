@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
-    <id>KhaosCode.MultiApp.Settings</id>
+    <id>KhaosKode.MultiApp.Settings</id>
     <version>1.0.1</version>
     <authors>Khaos</authors>
     <license type="expression">MIT</license>
@@ -13,7 +13,7 @@
     <repository type="git" url="https://github.com/KhaosKoder/Khaos.MultiApp.Settings" branch="refs/heads/main" commit="4cc7c7a9277d728404f7651e21a84c7f1ec58f44" />
     <dependencies>
       <group targetFramework="net9.0">
-        <dependency id="KhaosCode.Time" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="KhaosKode.Time" version="1.0.0" exclude="Build,Analyzers" />
         <dependency id="Khaos.Settings.Abstractions" version="1.0.1" exclude="Build,Analyzers" />
         <dependency id="Khaos.Settings.Core" version="1.0.1" exclude="Build,Analyzers" />
         <dependency id="Khaos.Settings.Data" version="1.0.1" exclude="Build,Analyzers" />
